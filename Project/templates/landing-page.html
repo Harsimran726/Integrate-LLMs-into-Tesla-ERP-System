@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Chat UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background 0.5s, color 0.5s;
+            background: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: 'T';
+            font-family: 'Times New Roman', serif;
+            color: rgba(255, 0, 0, 0.2);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50vw;
+            font-weight: bold;
+            z-index: -1;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 3.5em;
+            letter-spacing: -1.5px;
+            font-weight: 500;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 85%;
+            max-width: 1200px;
+            position: relative;
+            gap: 40px;
+        }
+
+        .prompt-container {
+            width: 350px;
+            padding: 30px;
+            background: rgba(23, 23, 23, 0.9);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: transform 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prompt-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            z-index: 0;
+            border-radius: inherit;
+        }
+
+        .prompt-container h3 {
+            color: #e31919;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .start-button {
+            padding: 18px 50px;
+            background: #e31919;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 4px;
+            font-size: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            background: #ff1f1f;
+            box-shadow: 0 0 20px rgba(227, 25, 25, 0.4);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 18px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .slider {
+            width: 55px;
+            height: 28px;
+            background: #333;
+            border-radius: 14px;
+            position: relative;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .slider::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 3px;
+            transition: 0.4s;
+        }
+
+        .dark-mode .slider::before {
+            left: 28px;
+        }
+
+        .dark-mode {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .dark-mode h1 {
+            color: #000000;
+        }
+
+        .dark-mode .prompt-container {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .theme-toggle {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-developers {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #e31919;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .social-logo {
+            height: 20px;
+            filter: invert(16%) sepia(99%) saturate(7404%) hue-rotate(358deg) brightness(93%) contrast(118%);
+            transition: transform 0.3s ease;
+        }
+
+        .social-logo:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span><div class="slider"></div>
+    </div>
+    <h1>LLMs Integrated into <b style="color: #e31919;"><span style="font-family: 'Times New Roman', Times, serif;font-size: larger;">T</span>esla</b> ERP System</h1>
+    <div class="container">
+        <div class="prompt-container" id="left-prompt">
+            <h3>AI Insights</h3>
+            <p>Here is the last year's data trend:</p>
+            <img src="C:\Users\harsi\Downloads\Screenshot 2025-03-05 012319.png" alt="Insights Chart" width="100%">
+        </div>
+        <form action="/chats" >
+            <button class="start-button" type="submit">Start Chat</button>
+        </form>
+        <div class="prompt-container" id="right-prompt">
+            <h3>Business Strategy</h3>
+            <p>Optimize business operations with these strategies:</p>
+            <ul>
+                <li>Improve inventory management</li>
+                <li>Enhance production efficiency</li>
+                <li>Invest in AI-driven analytics</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-developers">
+        Developed by Harsimran Singh and Sahil Jhakmola
+        <a href="https://www.linkedin.com/in/harsimransingh726/" target="_blank">
+            <img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Logo.svg.original.svg" class="social-logo" alt="LinkedIn">
+        </a>
+        <a href="https://github.com/harsimran726" target="_blank">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="social-logo" alt="GitHub">
+        </a>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeIcon = document.getElementById('theme-icon');
+            themeIcon.textContent = document.body.classList.contains('dark-mode') ? '🌞' : '🌙';
+        }
+
+        // function startChat() {
+        //     fetch('/StartChat', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({}),
+        //     })
+        //     .then(response => {
+        //         if (response.ok) {
+        //             window.location.href = '/chat';
+        //         } else {
+        //             alert('Failed to start chat session');
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //         alert('Error starting chat session');
+        //     });
+        // }
+    </script>
+</body>
+</html>
