@@ -34,6 +34,7 @@
             position: relative;
             padding-top: 10%;
             padding-bottom: 10%;
+            flex-direction: column;
         }
 
         body::before {
@@ -192,6 +193,75 @@
     <div class="theme-toggle" onclick="toggleTheme()">
         <span id="theme-icon">🌙</span><div class="slider"></div>
     </div>
+
+    <div class="query-suggestions">
+        <div class="suggestion-header">Popular Tesla ERP Queries</div>
+        <div class="suggestion-grid">
+            <div class="suggestion-item" onclick="handleSuggestionClick('Show sales trends for last quarter')">📈 Sales Trends</div>
+            <div class="suggestion-item" onclick="handleSuggestionClick('Current Model Y and Cybertruck risks')">⚠️ Inventory Risks</div>
+            <div class="suggestion-item" onclick="handleSuggestionClick('Top performing suppliers 2024')">🏭 Supplier Analysis</div>
+            <div class="suggestion-item" onclick="handleSuggestionClick('Service center pending requests')">🔧 Service Backlog</div>
+            <div class="suggestion-item" onclick="handleSuggestionClick('Lithium battery stock levels')">🔋 Inventory Check</div>
+            <div class="suggestion-item" onclick="handleSuggestionClick('Cybertruck pre-order statistics')">🚛 Cybertruck Orders</div>
+        </div>
+    </div>
+
+    <style>
+        .query-suggestions {
+            margin-bottom: 2rem;
+            width: 70%;
+            max-width: 800px;
+        }
+
+        .suggestion-header {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(227, 25, 25, 0.3);
+            text-align: center;
+        }
+
+        .suggestion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .suggestion-item {
+            background: var(--card-bg);
+            border: 1px solid rgba(227, 25, 25, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .suggestion-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(227, 25, 25, 0.2);
+            border-color: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .query-suggestions {
+                width: 90%;
+            }
+            
+            .suggestion-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        function handleSuggestionClick(queryText) {
+            const inputField = document.getElementById('query-input');
+            inputField.value = queryText;
+            submitQuery();
+        }
+    </script>
 
     <div class="query-container">
         <div class="query-card">

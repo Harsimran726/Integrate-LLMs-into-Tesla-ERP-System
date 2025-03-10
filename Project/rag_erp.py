@@ -40,7 +40,6 @@ memory = ConversationBufferWindowMemory(memory_key="chat_history",return_message
 ## Pre Processing of the Data like Documents, Web Scraping, Loading the Data, Vector Databae and Retrivers....
 paths = ["Tesla Model 3.pdf"] #"Tesla Model S Manual.pdf","Tesla Model X Manual.pdf","Tesla Model y Manual.pdf"]
 
-
     
 def get_extract_content(pdf_path):
     text = ""
@@ -221,17 +220,17 @@ for example :-
     Input : Provide me last year Model S Sales data
     call the db_mongo
 
-    Input: Generate the Sale Report of Model S and Model Y
-    Output: Total Sales of Model S and Model Y:
-            Model S: 23,343 Sold , Model Y: 23,232 Sold
-            Model S Revenue: $23,34,3434 , Model Y: $23,53,2353 
-            Highest Sales Region: Houston, Highest sales Region: New York
-            Lowest Sales Region: Texas , Lowest Sales Region: California 
-            Cost of Goods Sold: $19,23,2343 , Cost of Goods Sold: $20,23,423
-            Margin: Revenue - COGS , Margin: Revenue - COGS
-            Current Stocks in Inventory: 2,323  , Current Stocks in Inventory: 1,233
-            Reserved Cars: 2,233 , Reserved Cars: 243
-
+    Input: Generate the Sale Report 
+    Output: Sales Report:
+            Total Units Sold: 23,343
+            Revenue Generated: $2,334,343,400
+            Highest Sales Region: Houston
+            Lowest Sales Region: Texas
+            Cost of Goods Sold: $1,923,234,300
+            Profit Margin: $411,109,100
+            Current Stock in Inventory: 2,323 units
+            Reserved Cars: 2,233 units
+            
     Input:  Let me know about the Sales Trend and which Model we need in stock for next 3 months.
     Output: 🚗 Sales Trend Analysis (Last 12 Months)
             Based on historical sales data from January 2023 to February 2024, we have observed the following key trends:
@@ -262,6 +261,15 @@ for example :-
             ✅ Monitor real-time orders for Model 3 to prevent stock shortages.
             ✅ Adjust Model S inventory based on premium buyer demand trends.
             ✅ Offer limited-time incentives on Model X to boost sales.
+
+        Input: What’s the risk of a shortage for lithium-ion batteries next quarter?
+        Output:
+            Based on current market trends, there is a 20% risk of a lithium-ion battery shortage next quarter. This is primarily driven by rising global demand, supply chain constraints, and increasing raw material costs. To mitigate potential disruptions and ensure steady supply, it is advisable to place a bulk order in advance. Doing so can help secure inventory, minimize procurement risks, and potentially reduce costs by 10% through strategic purchasing and supplier negotiations.
+
+        Input: Which suppliers can deliver the fastest without increasing costs?    ['Retrive Car_ID from Sales_Order_Data then get the Salesperson name from Customer_Data']
+        Output:
+        Based on supplier performance data, Tracy Hahn can fulfill the order within 3 days at a rate of $50 per unit, ensuring the fastest delivery. Jacob Bell offers a slightly lower cost of $45 per unit but requires 5 days for delivery.
+        To meet urgent deadlines and avoid potential delays, it is recommended to proceed with Tracy Hahn for faster fulfillment. However, if cost savings take priority over speed, Jacob Bell remains a viable alternative
 
 Note: Try to keep Response under the 200000 Tokens
         
@@ -424,6 +432,33 @@ Supplier (from supplier list)
 Features
 Battery Capacity (kWh) (e.g., 250)
 Status (e.g., "Sold")
+
+Raw_material
+
+Fields:
+Material Name
+Usage
+Car Model (e.g., Model S, Model 3, Model X, Model Y, Cybertruck, Roadster)
+Variant (e.g., Long Range, Plaid, Standard Range Plus, Performance, etc.)
+date_time_in: When the material enters the inventory
+date_time_out: When the material is sent out for production
+total_comes: Total quantity received into inventory
+total_output: Total quantity output to production
+how_much_require: The amount of that material required for one car
+
+part_components
+
+Fields:
+Part Name: The identifier for the specific part or component.
+Category: The classification of the part (e.g., Battery & Powertrain, Chassis & Body).
+Usage: A brief description of how the part is used in production.
+Price_USD: The unit price of the part in U.S. dollars.
+COGS_USD: The cost of goods sold per unit in U.S. dollars.
+date_time_in: The timestamp when the part enters the inventory.
+date_time_out: The timestamp when the part is dispatched for production.
+total_comes: The total quantity of the part received into inventory.
+total_goes: The total quantity of the part that left inventory (used in production).
+
 Sales_Order_Data
 
 Fields:
@@ -482,6 +517,28 @@ Additional Constraints & Data Points:
 
 Supplier List:
 Freeman, Lang and Contreras; Smith, Graves and Barrett; Mcdonald, Torres and Holland; Roberts-Lopez, James Inc; Johnston Ltd; Thomas, Burch and Holden; Morris, Holt and Parker; Fernandez, Robertson and Francis; Rasmussen, Pham and Herrera.
+
+Parts & Components:
+Lithium-ion Battery Pack
+Electric Motor
+Inverter
+Chassis
+Infotainment System
+
+Material Names (Raw Materials):
+Aluminum
+Steel
+Copper
+Nickel
+Cobalt
+Lithium
+Graphite
+Silicon
+Rare Earth Metals
+Plastic & Composites
+Glass
+Rubber
+Adhesives & Sealants
 
 Allowed Values:
 
