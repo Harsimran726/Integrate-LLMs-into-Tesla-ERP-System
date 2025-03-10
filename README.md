@@ -5,12 +5,6 @@ This project aims to create a fully integrated ERP system for Tesla, leveraging 
 
 
 
-![Tesla AI-Integrated ERP System 1](https://ibb.co/wZ1hmZBq)
-![Tesla AI-Integrated ERP System 2](https://ibb.co/Zz9dvwGS)
-![Tesla AI-Integrated ERP System 3](https://ibb.co/RT2vsZTR)
-![Tesla AI-Integrated ERP System 4](https://ibb.co/qLm0gfNb)
-![Tesla AI-Integrated ERP System 5](https://ibb.co/4nKDn38K)
-
 
 ## Key Features:
 - **Integrated ERP Modules**: The system covers critical functions, including **Supply Chain**, **Inventory Management**, **Sales & Finance**, **Engineering**, and **Service**, all powered by AI.
