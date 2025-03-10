@@ -3,7 +3,7 @@
 
 This project aims to create a fully integrated ERP system for Tesla, leveraging the latest advancements in Large Language Models (LLMs), specifically **LLaMA 3.2 8B**, fine-tuned with supervised **LoRA adapters** using an **NVIDIA L4 24GB VRAM GPU**. The system also utilizes **Retrieval-Augmented Generation (RAG)** for dynamic, real-time updates. The hybrid architecture combines the accuracy and precision of fine-tuned LLM responses with the up-to-date information fetched through RAG, optimizing the system’s ability to provide accurate and actionable insights across all departments in Tesla.
 
-[url=https://postimg.cc/k2dn5rhp][img]https://i.postimg.cc/k2dn5rhp/Screenshot-2025-03-08-223222.png[/img][/url]
+(url=https://postimg.cc/k2dn5rhp][img]https://i.postimg.cc/k2dn5rhp/Screenshot-2025-03-08-223222.png[/img][/url)
 
 [url=https://postimg.cc/yJ1sFmKh][img]https://i.postimg.cc/yJ1sFmKh/Screenshot-2025-03-10-224958.png[/img][/url]
 
